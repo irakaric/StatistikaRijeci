@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,6 +74,44 @@ namespace StatistikaRijeci
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openfile = new OpenFileDialog
+            {
+                Filter = "Text File|*.txt",
+                Title = "Open a Text File"
+            };
+
+            if (openfile.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader reader = new StreamReader(openfile.FileName);
+                textBox1.Text = reader.ReadToEnd();
+                button1_Click(sender, e);
+            }
+        }
+
+        public void CloseApplication()
+        {
+            string message = "Do you want to close this application?";
+            string title = "Close Application";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if (result == DialogResult.Yes)
+            {
+                Close();
+            }
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CloseApplication();
+        }
+
+        private void menuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }
